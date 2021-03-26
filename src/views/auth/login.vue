@@ -2,6 +2,8 @@
   <div class="login_page">
     <div class="login_box">
       <div class="center_box">
+
+        <!--  rotate: tab 控制旋转 -->
         <!-- 登录&注册-->
         <div :class="{login_form: true, rotate: tab == 2}">
           <div :class="{tabs: true, r180: reverse == 2}">
@@ -20,6 +22,7 @@
               <input type="text" v-model="loginData.username" placeholder="请输入用户名" autocomplete="off">
               <input type="password" v-model="loginData.password" placeholder="请输入密码" autocomplete="off">
               <div class="error_msg">{{loginMessage}}</div>
+              <!-- v-if="subState" disabled="disabled" 防止重复提交表单 -->
               <input type="submit" v-if="subState" disabled="disabled" value="登录中···" class="btn" />
               <input type="submit" v-else value="登录" @submit="loginSubmit" class="btn" />
             </form>
@@ -56,8 +59,9 @@
   </div>
 </template>
 <script >
-export default {
 
+
+export default {
     data () {
       return {
         tab:  1, // 高亮当前标签名
@@ -82,10 +86,10 @@ export default {
     },
 
     methods: {
-
       // 切换标签
       changetab (int) {
           this.tab = int;
+          // eslint-disable-next-line no-unused-vars
           let _that = this;
           setTimeout(() => {
             this.reverse = int
@@ -94,7 +98,7 @@ export default {
 
       // 提交登录
       loginSubmit() {
-
+        this.$store.dispatch('UserLogin', this.loginData)
       },
 
       // 提交注册
@@ -105,6 +109,7 @@ export default {
     },
 }
 </script>
+
 <style scoped>
 @import '../../assets/style/login.css'; 
 </style>

@@ -1,3 +1,4 @@
+// 直接用 axios 也行
 import axios from 'axios'
 
 const service = axios.create({
