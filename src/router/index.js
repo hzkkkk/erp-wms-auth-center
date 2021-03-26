@@ -18,6 +18,19 @@ const router = new Router({
                 }
             ]
         },
+        // 刷新组件路由配置 +++++
+        {
+            path: '/refresh',
+            // component: function() {return ' '@/components/layout'' },
+            component: () => import('@/components/layout'),
+            children: [
+                {
+                    path: '',
+                    component: () => import('@/views/auth/refresh'),
+
+                }
+            ]
+        },
     ]
 })
 

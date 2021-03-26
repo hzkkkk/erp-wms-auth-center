@@ -64,3 +64,16 @@ export function logout(accessToken) {
         }
     })
 }
+
+// 刷新令牌接口 ++++++++++++++++++++++++++
+export function refreshToken(refreshToken) {
+    return request({
+        headers,
+        auth,
+        url: `/auth/user/refreshToken`, 
+        method: 'get',
+        params: {
+            refreshToken
+        }
+    })
+}
