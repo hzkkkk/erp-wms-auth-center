@@ -1,4 +1,4 @@
-import { login } from '@/api/auth'
+import { login, logout } from '@/api/auth'
 import { PcCookie, Key } from '@/utils/cookie' // 对 cookie 操作
 
 
@@ -51,7 +51,7 @@ const actions = {
             // 调用登录接口 /api/auth.js#login
             // 去掉空格 trim(),
             login({ username: username.trim(), password: password }).then(response => {
-                 console.log('response', response)
+                console.log('response', response)
                 // 获取响应值
                 const { code, data } = response
 
@@ -68,7 +68,23 @@ const actions = {
                 reject(error)
             })
         })
+    },
+
+    // 2. 退出，++++++
+    UserLogout({ state, commit }, redirectURL) {
+        // 调用退出接口, 上面不要忘记导入 logout 方法
+        logout(state.accessToken).then(() => {
+            // 重置状态
+            commit('RESET_USER_STATE')
+            // // 退出后，重写向地址，如果没有传重写向到登录页 /
+            window.location.href = redirectURL || '/'
+        }).catch(() => {
+            // 重置状态
+            commit('RESET_USER_STATE')
+            window.location.href = redirectURL || '/'
+        })
     }
+
 }
 
 export default {

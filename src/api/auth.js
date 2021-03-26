@@ -52,3 +52,15 @@ export function register(data) {
         params: data
     })
 }
+
+
+// 退出系统
+export function logout(accessToken) {
+    return request({
+        url: `/auth/logout`,
+        method: 'get',
+        params: {
+            accessToken
+        }
+    })
+}
