@@ -111,8 +111,12 @@
 
 
 <script >
+// 登陆和注册共用校验工具类
 import { isvalidUsername } from "@/utils/validate";
-// 导入 'getXieyi' 方法
+
+// 登陆核心方法： this.$store.dispatch("UserLogin", this.loginData)，UserLogin 里面再去调用 api/auth.js 的 login()
+// 注册核心方法： 直接调用 api/auth.js 里的 getUserByUsername() ，再调用 register()
+// 注册用 用户协议 注册
 import { getXieyi, getUserByUsername, register } from "@/api/auth";
 
 export default {
